@@ -81,7 +81,7 @@ void drawBigIcon(int16_t x, int16_t y, const bool icon[][ICON_WIDTH+2]);
 
 // Need to add page code after adding pages.-----------------------------------------------------------
 enum directoryCode {
-    MAIN_PAGE=1, WIFI_PAGE, SCAN_WIFI=299, WIFI_CONNECTION, WIFI_DISCONNECT, WIFI_INFO, BLUETOOTH_PAGE=500, DUMMY_PAGE, BACK, DEBUG=999
+    MAIN_PAGE=1, KEYBOARD_PAGE, WIFI_PAGE, SCAN_WIFI=299, WIFI_CONNECTION, WIFI_DISCONNECT, WIFI_INFO, BLUETOOTH_PAGE=500, DUMMY_PAGE, BACK, DEBUG_PAGE=998, DEBUG
 };
 
 typedef struct content {
@@ -259,7 +259,7 @@ extern uint8_t currentRow;
 extern uint8_t scroll;
 extern uint8_t cursorPos;
 extern SettingPage currentPage;
-extern Menu pages[5]; //----- LINE 262
+extern Menu pages[6]; //----- LINE 262
 
 // provisional page for wifi scanned list, and etc
 extern content tmp[ROW_SIZE];

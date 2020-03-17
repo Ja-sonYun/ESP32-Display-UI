@@ -67,7 +67,7 @@ KeyboardPage keyboardPage;
 //                                       { contents title, connected to, directory code(int) }
 content mainContents[ROW_SIZE] PROGMEM = {{"wifi",     "wifi_page", WIFI_PAGE},//     |------ LINE 67
                                           {"bluetooth","bluetooth_page", BLUETOOTH_PAGE},//     |
-                                          {"debug",    "debug",     DEBUG}};//        |
+                                          {"debug",    "debug",     DEBUG_PAGE}};//        |
 // mainpage(title, length of row, content)--------------------------------------------+
 Menu mainPage("main_page", 3, mainContents);
 // wifi
@@ -91,10 +91,14 @@ Menu dummyPage("dummy_page", 0, dummyContents);
 content dummyContents2[ROW_SIZE] = {{}};
 Menu dummyPage2("dummy_page2", 0, dummyContents2);
 
+content debugContents[ROW_SIZE] = {{"keyboard", "keyboard_page", KEYBOARD_PAGE},
+                           {"back", "main_page", BACK}};
+Menu debugPage("debug_page", 2, debugContents);
+
 content tmp[ROW_SIZE];
 uint8_t tmpLen;
 
-Menu pages[5] = {mainPage, wifiPage, dummyPage, dummyPage2, bluetoothPage};//----- LINE 91
+Menu pages[6] = {mainPage, wifiPage, dummyPage, dummyPage2, bluetoothPage, debugPage};//----- LINE 91
 //  pages[pages length]
 
 
@@ -305,9 +309,13 @@ void SettingPage::buttonAction(bool left, bool right, bool select) {
                         
                         break;
 
-                    case DEBUG:
-                        
+                    case DEBUG_PAGE:
+                        currentPage.setCurrentPage(debugPage);
+                        break;
 
+                    case KEYBOARD_PAGE:
+                        keyboardPage.initialize(&currentPage, "title", "message");
+                        break;
 
                     case BACK:  // line 300
                         String backTo = this->contents[currentRow].connectedTo;
@@ -383,11 +391,16 @@ void SettingPage::buttonAction(bool left, bool right, bool select) {
                     case CLOSE_ICON_CODE:
                         // close keyboard action here
                         switch (code) {
-                                case WIFI_CONNECTION:
-                                    keyboardPage.clearKeyboardSection();
-                                    tmpToCurrentPage(false);
-                                    break;
-                                
+                            case WIFI_CONNECTION:
+                                keyboardPage.clearKeyboardSection();
+                                tmpToCurrentPage(false);
+                                break;
+
+                            case KEYBOARD_PAGE:
+                                keyboardPage.clearKeyboardSection();
+                                currentPage.setCurrentPage(debugPage, false);
+                                break;
+                            
                             }
 
                         break;
@@ -404,6 +417,13 @@ void SettingPage::buttonAction(bool left, bool right, bool select) {
                                     keyboardPage.clearKeyboardSection();
                                     tmpToCurrentPage(false);
                                 }
+                                break;
+
+                            case KEYBOARD_PAGE:                               
+                                warningPage(keyboardPage.Entered);
+                                delay(2000);
+                                keyboardPage.clearKeyboardSection();
+                                currentPage.setCurrentPage(debugPage, false);
                                 break;
                             
                         }
