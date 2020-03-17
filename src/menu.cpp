@@ -19,6 +19,7 @@ KeyboardPage keyboardPage;
 //     |----- 1.2 : And then, move to this file("menu.cpp") and add page's content and menu class. ( like line 67 at this file. )
 //     |      |         When you add back button, go to line 300 and add action.
 //     |----- 1.3 : Next, put to the class menu array ( pages[4] ) what you made at 1.2 and increase pages length. ( line 91 )
+//     |                And move to menu.h and also increase pages length. ( line 262 at "menu.h" )
 //     +----- 1.4 : Add action when you click the menu. ( line 257)
 //            |------ 1.4.1 : Add " case 'directorycode': " 
 //            |               |  Action here.( when you want to move to the other page, add 'currentPage.setCurrentPage(class name of page)' )
@@ -32,7 +33,6 @@ KeyboardPage keyboardPage;
 //            |                     and go to line 300, and add action when clicked back button
 //            |                  And lastly, set tmpLen inside your function. After that, go back to here and open tmpToCurrentPage function and
 //            |                  add " break; ".
-//            |                  
 //            |                 
 //  2. Adding confirm page
 //     |----- 2.1 : At the line 271 ( same as 1.4.1 ), Add case of directorycode.------------------------------------+
@@ -65,8 +65,8 @@ KeyboardPage keyboardPage;
 
 // Add page like below codes.-----------------------------------------------------------
 //                                       { contents title, connected to, directory code(int) }
-content mainContents[ROW_SIZE] PROGMEM = {{"main",     "",          MAIN_PAGE},//     |------ LINE 67
-                                          {"wifi",     "wifi_page", WIFI_PAGE},//     |
+content mainContents[ROW_SIZE] PROGMEM = {{"wifi",     "wifi_page", WIFI_PAGE},//     |------ LINE 67
+                                          {"bluetooth","bluetooth_page", BLUETOOTH_PAGE},//     |
                                           {"debug",    "debug",     DEBUG}};//        |
 // mainpage(title, length of row, content)--------------------------------------------+
 Menu mainPage("main_page", 3, mainContents);
@@ -78,6 +78,12 @@ content wifiContents[ROW_SIZE] PROGMEM = {{"scan wifi",              "scan_wifi"
                                          {"back",                   "main_page",  BACK}};
 Menu wifiPage("wifi_page", 5, wifiContents);
 
+// BLUETOOTH_PAGE
+content bluetoothContents[ROW_SIZE] PROGMEM = {{"test", "", 0},
+                                               {"back", "main_page", BACK}};
+
+Menu bluetoothPage("bluetooth_page", 2, bluetoothContents);
+
 // provisional page for wifi scanned list, and etc
 content dummyContents[ROW_SIZE] = {{}};
 Menu dummyPage("dummy_page", 0, dummyContents);
@@ -88,7 +94,7 @@ Menu dummyPage2("dummy_page2", 0, dummyContents2);
 content tmp[ROW_SIZE];
 uint8_t tmpLen;
 
-Menu pages[4] = {mainPage, wifiPage, dummyPage, dummyPage2};//----- LINE 91
+Menu pages[5] = {mainPage, wifiPage, dummyPage, dummyPage2, bluetoothPage};//----- LINE 91
 //  pages[pages length]
 
 
@@ -212,7 +218,6 @@ void SettingPage::printPage(bool notificationBar) {
         wifi_connection();
     }
     
-    
 }
 
 void SettingPage::buttonAction(bool left, bool right, bool select) {
@@ -273,6 +278,10 @@ void SettingPage::buttonAction(bool left, bool right, bool select) {
 
                     case WIFI_CONNECTION:
                         confirmPage.setNewConfirmPage(&currentPage, "=Connect Wifi to=", this->contents[currentRow].connectedTo);
+                        break;
+
+                    case BLUETOOTH_PAGE:
+                        currentPage.setCurrentPage(bluetoothPage);
                         break;
         
                     case SCAN_WIFI:
