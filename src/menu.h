@@ -22,7 +22,7 @@
     #define OLED_RESET     -1 // Reset pin # (or -1 if sharing Arduino reset pin)
     extern Adafruit_SSD1306 display_;
     
-    // For ssd1306 library (Not tested)
+    // For ssd1306 library
     //==================================
     #define drawString(x, y, str)            { display_.setTextSize(1); display_.setCursor(x, y); display_.println(String(str));  }
     // Doesn't work drawString
