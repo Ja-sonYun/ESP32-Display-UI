@@ -1,9 +1,9 @@
-# ESP32-Heltec-Display-UI -> In progress
+# ESP32-Display-UI for 128x64 display
 
 ## Require stuffs 
 - [heltec wifi kit 32](https://robotzero.one/heltec-wifi-kit-32/)  
 - [heltec wifi kit library](https://github.com/Heltec-Aaron-Lee/WiFi_Kit_series). 
-- Also work with other ESP32s (screen size is 128x64).
+- Or, also work with other ESP32s (screen size is 128x64).
 
 
 ## Video
