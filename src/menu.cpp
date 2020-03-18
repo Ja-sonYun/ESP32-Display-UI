@@ -8,6 +8,10 @@ SettingPage currentPage;
 ConfirmPage confirmPage;
 KeyboardPage keyboardPage;
 
+#ifdef __SSD1306__
+    Adafruit_SSD1306 display_(SCREEN_PIXEL_WIDTH, SCREEN_PIXEL_HEIGHT, &Wire, OLED_RESET);
+#endif
+
 /////////////////
 //             //      
 // DESCRIPTION //
@@ -65,7 +69,7 @@ KeyboardPage keyboardPage;
 
 // Add page like below codes.-----------------------------------------------------------
 //                                       { contents title, connected to, directory code(int) }
-content mainContents[ROW_SIZE] PROGMEM = {{"wifi",     "wifi_page", WIFI_PAGE},//     |------ LINE 67
+content mainContents[ROW_SIZE] PROGMEM = {{"wifi",     "wifi_page", WIFI_PAGE},//               |------ LINE 67
                                           {"bluetooth","bluetooth_page", BLUETOOTH_PAGE},//     |
                                           {"debug",    "debug",     DEBUG_PAGE}};//        |
 // mainpage(title, length of row, content)--------------------------------------------+

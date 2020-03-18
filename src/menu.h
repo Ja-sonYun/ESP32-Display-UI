@@ -1,8 +1,8 @@
 #ifndef MENU_H
 #define MENU_H
 
-#define __HELTEC__  // <--uncomment this line if you're using ssd1306
-//#define __SSD1306__  // <--and comment this line.
+//#define __HELTEC__  // <--uncomment this line if you're using ssd1306
+#define __SSD1306__  // <--and comment this line.
 
 #include "arduino.h"
 #include "network/network.h"

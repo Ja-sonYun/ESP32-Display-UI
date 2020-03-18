@@ -1,11 +1,14 @@
 #include "touchSensor.h"
 #include "menu.h"
 
-// If you're using ssd1306, go to menu.h and uncomment __SSD1306__ and comment __HELTEC__.
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                             //
+// If you're using ssd1306, go to src/menu.h and uncomment __SSD1306__ and comment __HELTEC__. //
+//                                                                                             //
+// Description is at < src/menu.cpp > for modifying pages.                                     //
+//                                                                                             //
+/////////////////////////////////////////////////////////////////////////////////////////////////
 
-#ifdef __SSD1306__
-    Adafruit_SSD1306 display_(SCREEN_PIXEL_WIDTH, SCREEN_PIXEL_HEIGHT, &Wire, OLED_RESET);
-#endif
 
 //touchsensor ***(pin number, read value, value range)
 TouchSensor leftButton(T7);
@@ -25,6 +28,8 @@ void setup() {
 void loop() {
     checkSensorsInput();
 
+    // currentPage.buttonAction(bool type, bool type, bool type);
+    // TouchSensor.isTouched() return bool type
     currentPage.buttonAction(leftButton.isTouched(), rightButton.isTouched(), selectButton.isTouched());
 
     currentPage.printBufferPage();
