@@ -622,6 +622,16 @@ void warningPage(String message) {
 }
 
 void initialize_display() {
+    #ifdef __HELTEC__
+        Heltec.begin(true /*DisplayEnable Enable*/, false /*LoRa Enable*/, true /*Serial Enable*/);
+    #endif
+    #ifdef __SSD1306__
+        Serial.begin(9600);
+        if(!display_.begin(SSD1306_SWITCHCAPVCC, 0x3C)) { // Address 0x3D for 128x64
+            Serial.println(F("SSD1306 allocation failed"));
+            for(;;); // Don't proceed, loop forever
+        }
+    #endif
     clear();
     currentPage.setCurrentPage(pages[0]);
     currentPage.printBufferPage();

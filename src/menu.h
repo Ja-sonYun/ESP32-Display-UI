@@ -1,42 +1,59 @@
 #ifndef MENU_H
 #define MENU_H
 
+#define __HELTEC__  // <--uncomment this line if you're using ssd1306
+//#define __SSD1306__  // <--and comment this line.
+
 #include "arduino.h"
 #include "network/network.h"
-#include "heltec.h"
 #include "icon.h"
 
-// Display command shortcuts for heltec library
-//==============================================
-#define drawString(x, y, str)               { Heltec.display -> drawString(x, y, str);          }
-#define clear()                             { Heltec.display -> clear();                        }
-#define display()                           { Heltec.display -> display();                      }
-#define drawHorizontalLine(x, y, len)       { Heltec.display -> drawHorizontalLine(x, y, len);  }
-#define drawVerticalLine(x, y, len)         { Heltec.display -> drawVerticalLine(x, y, len);    }
-#define drawRect(x, y, width, height)       { Heltec.display -> drawRect(x, y, width, height);  }
-#define drawLine(x0, y0, x1, y1)            { Heltec.display -> drawLine(x0, y0, x1, y1);       }
-#define getStringWidth(str)                  Heltec.display -> getStringWidth(String(str))     
-#define setPixel(x, y)                      { Heltec.display -> setPixel(x, y);                 }
+#define SCREEN_PIXEL_HEIGHT 64
+#define SCREEN_PIXEL_WIDTH 128
 
-// For ssd1306 library (Not tested)
-//==================================
-//
-// #define drawString(x, y, str)            { display.setTextSize(1); display.setCursor(x, y); display.println(F(str)); }
-// #define clear()                          { display.clearDisplay();                                                   }
-// #define display()                        { display.display();                                                        }
-// #define drawHorizontalLine(x, y, len)    { display.drawLine(x, y, x, y+len, SSD1306_WHITE);                          }
-// #define drawVerticalLine(x, y, len)      { display.drawLine(x, y, x+len, y, SSD1306_WHITE);                          }
-// #define drawRect(x, y, width, height)    { display.drawRect(x, y, width, height, SSD1306_WHITE);                     }
-// #define drawLine(x0, y0, x1, y1)         { display.drawLine(x0, y0, x1, y1, SSD1306_WHITE);                          }
-// #define getStringWidth(str)              { (str * 6)                                                                 }
-// #define setPixel(x, y)                   { display.drawPixel(x, y, SSD1306_WHITE);                                   }
+
+// Currently, drawString at SSD1306 doesn't work
+#ifdef __SSD1306__
+    #include "SPI.h"
+    #include "Wire.h"
+    #include "Adafruit_GFX.h"
+    #include "Adafruit_SSD1306.h"
+
+    #define OLED_RESET     -1 // Reset pin # (or -1 if sharing Arduino reset pin)
+    extern Adafruit_SSD1306 display_;
+    
+    // For ssd1306 library (Not tested)
+    //==================================
+    #define drawString(x, y, str)            { display_.setTextSize(1); display_.setCursor(x, y); display_.println(String(str));  }
+    // Doesn't work drawString
+    #define clear()                          { display_.clearDisplay();                                                   }
+    #define display()                        { display_.display();                                                        }
+    #define drawHorizontalLine(x, y, len)    { display_.drawLine(x, y, x + len, y, SSD1306_WHITE);                        }
+    #define drawVerticalLine(x, y, len)      { display_.drawLine(x, y, x, y + len, SSD1306_WHITE);                        }
+    #define drawRect(x, y, width, height)    { display_.drawRect(x, y, width, height, SSD1306_WHITE);                     }
+    #define drawLine_(x0, y0, x1, y1)        { display_.drawLine(x0, y0, x1, y1, SSD1306_WHITE);                          }
+    #define getStringWidth(str)              ( String(str).length() * 6 )                                                                 
+    #define setPixel(x, y)                   { display_.drawPixel(x, y, SSD1306_WHITE);                                   }
+#endif
+#ifdef __HELTEC__
+    #include "heltec.h"
+    // Display command shortcuts for heltec library
+    //==============================================
+    #define drawString(x, y, str)               { Heltec.display -> drawString(x, y, str);          }
+    #define clear()                             { Heltec.display -> clear();                        }
+    #define display()                           { Heltec.display -> display();                      }
+    #define drawHorizontalLine(x, y, len)       { Heltec.display -> drawHorizontalLine(x, y, len);  }
+    #define drawVerticalLine(x, y, len)         { Heltec.display -> drawVerticalLine(x, y, len);    }
+    #define drawRect(x, y, width, height)       { Heltec.display -> drawRect(x, y, width, height);  }
+    #define drawLine_(x0, y0, x1, y1)           { Heltec.display -> drawLine(x0, y0, x1, y1);       }
+    #define getStringWidth(str)                  Heltec.display -> getStringWidth(String(str))     
+    #define setPixel(x, y)                      { Heltec.display -> setPixel(x, y);                 }
+#endif
 
 
 #define CHAR_WIDTH 6
 #define CHAR_HEIGHT 10
 #define SCREEN_ROW_SIZE 5
-#define SCREEN_PIXEL_HEIGHT 64
-#define SCREEN_PIXEL_WIDTH 128
 #define ROW_SIZE 20
 #define ROW_HEIGHT 10
 #define DOWN_SCROLL SCREEN_ROW_SIZE-2 // 3
