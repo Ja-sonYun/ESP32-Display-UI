@@ -64,4 +64,4 @@ This is my first project wirtten in c/c++. You can make your own UI for execute 
   
 
   
- drawString() doesn't work for ssd1306 at menu.h
+ drawString() doesn't work for ssd1306 at src/menu.h
