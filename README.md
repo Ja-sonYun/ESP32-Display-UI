@@ -18,7 +18,7 @@
 This is my first project wirtten in c/c++. You can make your own UI for execute your function easily.
 
 ```
-// This description is from "menu.cpp"
+// Original of the description is at src/menu.cpp
 //
 //  1. Adding setting page
 //     |----- 1.1 : Add directoryCode which is at the "menu.h" with Page title
