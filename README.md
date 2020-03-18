@@ -59,3 +59,9 @@ This is my first project wirtten in c/c++. You can make your own UI for execute 
 //            |         keyboardPage.initialize(&currentPage, title, message);
 //            3.2 : Go to line 370, add action when clicked close and enter with current directory code ( switch statement ).
 //
+```
+## Issue
+  
+
+  
+ drawString() doesn't work for ssd1306
