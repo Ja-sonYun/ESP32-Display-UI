@@ -24,8 +24,8 @@
     
     // For ssd1306 library
     //==================================
-    #define drawString(x, y, str)            { display_.setTextSize(1); display_.setCursor(x, y); display_.println(String(str));  }
-    // Doesn't work drawString
+    #define drawString(x, y, str)            { display_.setTextSize(1); display_.setTextColor(SSD1306_WHITE); display_.setCursor(x, y); display_.println(F(String(str)));  }
+    // not tested drawString
     #define clear()                          { display_.clearDisplay();                                                   }
     #define display()                        { display_.display();                                                        }
     #define drawHorizontalLine(x, y, len)    { display_.drawLine(x, y, x + len, y, SSD1306_WHITE);                        }
