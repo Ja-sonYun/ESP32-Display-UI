@@ -25,7 +25,7 @@ This is my first project wirtten in c/c++. You can make your own UI for execute 
 //     |----- 1.2 : And then, move to this file("menu.cpp") and add page's content and menu class. ( like line 67 at this file. )
 //     |      |         When you add back button, go to line 300 and add action.
 //     |----- 1.3 : Next, put to the class menu array ( pages[4] ) what you made at 1.2 and increase pages length. ( line 91 )
-//     +----- 1.4 : Add action when you click the menu. ( line 257)
+//     +----- 1.4 : Add action for when you click the menu. ( line 257)
 //            |------ 1.4.1 : Add " case 'directorycode': " 
 //            |               |  Action here.( when you want to move to the other page, add 'currentPage.setCurrentPage(class name of page)' )
 //            |               |  Or just your function. Don't forget " break; ". when you use your own function,
