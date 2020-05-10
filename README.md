@@ -10,8 +10,6 @@
   
 [![example viedo](https://img.youtube.com/vi/ZnySHmTHtwk/0.jpg)](https://youtu.be/ZnySHmTHtwk)
 
-[reddit link](https://www.reddit.com/r/arduino/comments/fjiyuu/my_first_project_written_in_cpp_id_be_happy_to/?utm_source=share&utm_medium=ios_app&utm_name=iossmf)
-
 
 ## Description
   
